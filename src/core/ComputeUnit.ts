@@ -17,7 +17,7 @@ export default class ComputeUnit extends HObject {
 
   protected _material: Material;
   protected _matVersion: number = -1;
-  protected _pipeline: GPUComputePipeline;
+  protected _pipeline: GPUComputePipeline | undefined;
 
   get groups() {
     return this._groups;
@@ -46,7 +46,7 @@ export default class ComputeUnit extends HObject {
       this._matVersion = _material.version;
     }
 
-    pass.setPipeline(this._pipeline);
+    pass.setPipeline(this._pipeline!);
     pass.setBindGroup(1, _material.bindingGroup);
     pass.dispatchWorkgroups(_groups.x, _groups.y, _groups.z);
   }
@@ -77,7 +77,7 @@ export default class ComputeUnit extends HObject {
       ]}),
   
       compute: {
-        module: cs,
+        module: cs as GPUShaderModule,
         entryPoint: "main"
       }
     });

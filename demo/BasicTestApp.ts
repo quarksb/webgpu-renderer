@@ -26,7 +26,6 @@ export default class BasicTestApp {
     );
     rootNode.addChild(this._camera);
     this._camera.pos.set([0, 0, 6]);
-    console.log(this._camera)
 
     // const geometry = new H.Geometry(
     //   [
