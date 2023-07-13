@@ -55,16 +55,16 @@ fn blur(center: vec2<i32>, size: vec2<i32>) -> vec4<f32> {
 
   let meanLum: f32 = sumLum / count;
 
-  var stdError: f32 = 0.;
+  var stdx: f32 = 0.;
   for (var r: i32 = 0; r < localUV.x; r = r + 1) {
     for (var c: i32 = 0; c < localUV.y; c = c + 1) {
       let lum: f32 = lums[r][c];
-      stdError = stdError + (lum - meanLum) * (lum - meanLum);
+      stdx = stdx + (lum - meanLum) * (lum - meanLum);
     }
   }
-  stdError = sqrt(stdError / (count - 1.));
+  stdx = sqrt(stdx / (count - 1.));
 
-  let largestLum: f32 = max(meanLum + stdError * 2., 1.);
+  let largestLum: f32 = max(meanLum + stdx * 2., 1.);
 
   var lum: f32 = calcLum(centerColor.rgb);
   if (lum > largestLum) {
