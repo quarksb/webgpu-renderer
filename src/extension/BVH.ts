@@ -34,8 +34,8 @@ export class Bounds {
   public min: Float32Array;
 
   private _isDirty: boolean = false;
-  private _center: Float32Array;
-  private _size: Float32Array;
+  private _center: Float32Array | null = null;
+  private _size: Float32Array | null = null;
 
   get center() {
     if (!this._center || this._isDirty) {
@@ -54,7 +54,7 @@ export class Bounds {
   }
 
   get maxExtends(): EAxis {
-    const size = this.size;
+    const size = this.size!;
     if (size[0] > size[2]) {
       return size[0] > size[1] ? EAxis.X : EAxis.Y;
     } else {
